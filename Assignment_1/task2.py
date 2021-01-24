@@ -3,9 +3,9 @@ import numpy as np
 camera = cv2.VideoCapture(0)
 width = int(camera.get(cv2.CAP_PROP_FRAME_WIDTH))
 height = int(camera.get(cv2.CAP_PROP_FRAME_HEIGHT))
-vout = cv2.VideoWriter('./video.avi', cv2.VideoWriter_fourcc(*'XVID'), 25, (width, height))
+vout = cv2.VideoWriter('video.avi', cv2.VideoWriter_fourcc(*'XVID'), 25, (width, height))
 
-functionNo = 2
+functionNo = 1
 key = cv2.waitKey(1) & 0xFF
 while True:
     if functionNo == 1:
@@ -13,6 +13,7 @@ while True:
         cv2.imshow("Original_Camera", frame)
         vout.write(frame)
         key = cv2.waitKey(1) & 0xFF
+        print(key)
 
     elif functionNo == 2:
         ret0, frame = camera.read()
@@ -90,6 +91,3 @@ while True:
     elif key == ord('6'):
         functionNo = 6
         cv2.destroyAllWindows()
-
-camera.release()
-cv2.destroyAllWindows()
