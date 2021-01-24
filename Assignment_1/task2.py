@@ -3,9 +3,9 @@ import numpy as np
 camera = cv2.VideoCapture(0)
 width = int(camera.get(cv2.CAP_PROP_FRAME_WIDTH))
 height = int(camera.get(cv2.CAP_PROP_FRAME_HEIGHT))
-vout = cv2.VideoWriter('video.avi', cv2.VideoWriter_fourcc(*'XVID'), 25, (width, height))
+vout = cv2.VideoWriter('Task2.avi', cv2.VideoWriter_fourcc(*'XVID'), 25, (width, height))
 
-functionNo = 1
+functionNo = 5
 key = cv2.waitKey(1) & 0xFF
 while True:
     if functionNo == 1:
@@ -35,27 +35,31 @@ while True:
         ret0, frame = camera.read()
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         gray = np.float32(gray)
-        dst = cv2.cornerHarris(gray,2,3,0.04)
+        dst = cv2.cornerHarris(gray,2,5,0.07)
         
         #result is dilated for marking the corners, not important
         dst = cv2.dilate(dst,None)
 
         # Threshold for an optimal value, it may vary depending on the image.
         frame[dst>0.01*dst.max()]=[0,0,255]
-        cv2.imshow("Canny_Corner_function", dst)
+        cv2.imshow("Canny_Corner_function", frame)
         vout.write(dst)
         key = cv2.waitKey(1) & 0xFF
 
     elif functionNo == 5:
         ret0, frame = camera.read()
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        edges = cv2.Canny(gray,50,150,apertureSize = 3)
-        minLineLength = 100
-        maxLineGap = 10
-        lines = cv2.HoughLinesP(edges,1,np.pi/180,100,minLineLength,maxLineGap)
+        edges = cv2.Canny(gray,50,150)
+        minLineLength = 300
+        maxLineGap = 20
         # lines = cv2.HoughLines(edges,1,np.pi/180,200)
-        for x1,y1,x2,y2 in lines[0]:
-            cv2.line(frame,(x1,y1),(x2,y2),(0,255,0),2)
+        lines = cv2.HoughLinesP(edges,1,np.pi/180,30,maxLineGap=250)
+        # lines = cv2.HoughLines(edges,1,np.pi/180,200)
+        # for x1,y1,x2,y2 in lines[0]:
+        #     cv2.line(frame,(x1,y1),(x2,y2),(0,255,0),2)
+        for line in lines:
+            x1, y1, x2, y2 = line[0]
+            cv2.line(frame, (x1, y1), (x2, y2), (0, 0, 128), 1)
         cv2.imshow("Hough_Lines_function", frame)
         vout.write(frame)
         key = cv2.waitKey(1) & 0xFF
