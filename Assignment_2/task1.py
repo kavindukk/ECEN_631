@@ -11,8 +11,8 @@ objp[:,:2] = np.mgrid[0:10,0:7].T.reshape(-1,2)
 objpoints = [] # 3d point in real world space
 imgpoints = [] # 2d points in image plane.
 
-imagePath = os.path.join(os.getcwd(),'Assignment_2','images','JPEG','AR1.jpg')
-savePath = os.path.join(os.getcwd(),'Assignment_2','images','results','task1.jpg')
+imagePath = os.path.join(os.getcwd(),'images','JPEG','AR1.jpg')
+savePath = os.path.join(os.getcwd(),'images','results','task1.jpg')
 img = cv.imread(imagePath)
 gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
 # Find the chess board corners
