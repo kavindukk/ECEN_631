@@ -23,7 +23,8 @@ def different(name):
     newcameramtx, roi = cv2.getOptimalNewCameraMatrix(mtx, dist, (w, h), 0, (w, h))
 
     # undistort
-    dst = cv2.undistort(img, mtx, dist, None, newcameramtx)
+    # dst = cv2.undistort(img, mtx, dist, None, newcameramtx)
+    dst = cv2.undistort(img, mtx, dist, None, mtx)
 
     # crop the image
     x, y, w, h = roi
