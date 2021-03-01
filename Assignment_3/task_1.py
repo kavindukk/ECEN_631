@@ -37,13 +37,17 @@ def callibrate_camera(imgCategory, cameraName):
     cv2.destroyAllWindows()
 
 ##Practice Images
-callibrate_camera('Practice_Images', 'L')
-callibrate_camera('Practice_Images', 'R')
+# callibrate_camera('Practice_Images', 'L')
+# callibrate_camera('Practice_Images', 'R')
+callibrate_camera('Practice_Images', 'SL')
+callibrate_camera('Practice_Images', 'SR')
 
 ##Test Images
 #Left Camera Callibration
 callibrate_camera('Test_Images','Left_Cali')
 #Right Camera Callibration
 callibrate_camera('Test_Images','Right_Cali')
+callibrate_camera('Test_Images','Stereo_Left')
+callibrate_camera('Test_Images','Stereo_Right')
 
 
